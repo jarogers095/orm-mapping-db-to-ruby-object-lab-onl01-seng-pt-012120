@@ -22,7 +22,11 @@ class Student
   end
 
   def self.find_by_name(name)
+    sql = "SELECT * FROM students WHERE name = ?;"
     
+    the_student = Student.new_from_db(DB[:conn].execute(sql, name))
+    
+    return the_student
   end
   
   def save
