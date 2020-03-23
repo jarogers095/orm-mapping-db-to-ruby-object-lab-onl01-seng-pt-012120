@@ -23,6 +23,18 @@ class Student
   end
 
 
+  def self.all_students_in_grade_9()
+    sql = "SELECT * FROM students WHERE grade = ?;"
+    
+    array_of_students = DB[:conn].execute(sql, 9).map do |row|
+      Student.new_from_db(row)
+    end
+    
+    return array_of_students
+  end
+
+
+
   def self.find_by_name(name)
     sql = "SELECT * FROM students WHERE name = ? LIMIT 1;"
     
