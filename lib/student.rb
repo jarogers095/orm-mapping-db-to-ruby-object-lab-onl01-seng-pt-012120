@@ -11,6 +11,7 @@ class Student
     return new_student
   end
 
+
   def self.all
     sql = "SELECT * FROM students;"
     
@@ -21,11 +22,13 @@ class Student
     return array_of_students
   end
 
+
   def self.find_by_name(name)
     sql = "SELECT * FROM students WHERE name = ?;"
     
     return Student.new_from_db(DB[:conn].execute(sql, name).first)
   end
+  
   
   def save
     sql = <<-SQL
@@ -35,6 +38,7 @@ class Student
 
     DB[:conn].execute(sql, self.name, self.grade)
   end
+  
   
   def self.create_table
     sql = <<-SQL
@@ -47,6 +51,7 @@ class Student
 
     DB[:conn].execute(sql)
   end
+
 
   def self.drop_table
     sql = "DROP TABLE IF EXISTS students"
